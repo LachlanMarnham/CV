@@ -1,0 +1,362 @@
+%% start of file `template.tex'.
+%% Copyright 2006-2013 Xavier Danaux (xdanaux@gmail.com).
+%
+% This work may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License version 1.3c,
+% available at http://www.latex-project.org/lppl/.
+
+
+\documentclass[11pt,a4paper,sans]{moderncv}        % possible options include font size ('10pt', '11pt' and '12pt'), paper size ('a4paper', 'letterpaper', 'a5paper', 'legalpaper', 'executivepaper' and 'landscape') and font family ('sans' and 'roman')
+
+% modern themes
+\moderncvstyle{banking}                            % style options are 'casual' (default), 'classic', 'oldstyle' and 'banking'
+\moderncvcolor{blue}                                % color options 'blue' (default), 'orange', 'green', 'red', 'purple', 'grey' and 'black'
+%\renewcommand{\familydefault}{\sfdefault}         % to set the default font; use '\sfdefault' for the default sans serif font, '\rmdefault' for the default roman one, or any tex font name
+%\nopagenumbers{}                                  % uncomment to suppress automatic page numbering for CVs longer than one page
+% character encoding
+\usepackage[utf8]{inputenc}                       % if you are not using xelatex ou lualatex, replace by the encoding you are using
+%\usepackage{CJKutf8}                              % if you need to use CJK to typeset your resume in Chinese, Japanese or Korean
+
+% adjust the page margins
+\usepackage[scale=0.75]{geometry}
+\usepackage{eurosym}
+%\setlength{\hintscolumnwidth}{3cm}                % if you want to change the width of the column with the dates
+%\setlength{\makecvtitlenamewidth}{14pt}           % for the 'classic' style, if you want to force the width allocated to your name and avoid line breaks. be careful though, the length is normally calculated to avoid any overlap with your personal info; use this at your own typographical risks...
+\usepackage[bottom]{footmisc}
+\usepackage{multicol}
+\usepackage{import}
+\usepackage{etoolbox}
+\usepackage{bbding}
+\usepackage[misc]{ifsym}
+\makeatletter
+
+% personal data
+\makeatletter
+\renewcommand*{\maketitle}{%
+  \setlength{\maketitlewidth}{\textwidth}%
+  \hfil%
+  \parbox{\maketitlewidth}{%
+    \centering%
+    % name and title
+    \namestyle{\@firstname~\@lastname}%
+    \ifthenelse{\equal{\@title}{}}{}{\titlestyle{~|~\@title}}\\% \isundefined doesn't work on \@title, as LaTeX itself defines \@title (before it possibly gets redefined by \title) 
+    % detailed information
+    \addressfont\color{color2}%
+    \ifthenelse{\isundefined{\@addressstreet}}{}{\addtomaketitle{\addresssymbol\@addressstreet}%
+      \ifthenelse{\equal{\@addresscity}{}}{}{\addtomaketitle[~--~]{\@addresscity}}% if \addresstreet is defined, \addresscity and \addresscountry will always be defined but could be empty
+      \ifthenelse{\equal{\@addresscountry}{}}{}{\addtomaketitle[~--~]{\@addresscountry}}%
+      \flushmaketitle\@firstmaketitleelementtrue\\}%
+    \collectionloop{phones}{% the key holds the phone type (=symbol command prefix), the item holds the number
+      \addtomaketitle{\csname\collectionloopkey phonesymbol\endcsname\collectionloopitem}}%
+    \ifthenelse{\isundefined{\@email}}{}{\addtomaketitle{\emailsymbol\emaillink{\@email}}}%
+    \ifthenelse{\isundefined{\@homepage}}{}{\addtomaketitle{\homepagesymbol\httplink{\@homepage}}}%
+    \collectionloop{socials}{% the key holds the social type (=symbol command prefix), the item holds the link
+      \addtomaketitle{\csname\collectionloopkey socialsymbol\endcsname\collectionloopitem}}%
+    \ifthenelse{\isundefined{\@extrainfo}}{}{\addtomaketitle{\@extrainfo}}%
+    \flushmaketitle}\\[2.5em]}% need to force a \par after this to avoid weird spacing bug at the first section if no blank line is left after \maketitle
+
+ \makeatother
+\name{Lachlan}{Marnham}
+\title{Curriculum Vitae}                               % optional, remove / comment the line if not wanted
+\address{25a Clifton Road, Exeter, United Kingdom, EX1 2BW}{}{}% optional, remove / comment the line if not wanted; the "postcode city" and and "country" arguments can be omitted or provided empty
+\phone[mobile]{+44 7856516125}                   % optional, remove / comment the line if not wanted
+%\phone[fixed]{01234 123456}                    % optional, remove / comment the line if not wanted
+%\phone[fax]{+3~(456)~789~012}                      % optional, remove / comment the line if not wanted
+\email{llm204@exeter.ac.uk}                               % optional, remove / comment the line if not wanted
+                       % optional, remove / comment the line if not wanted 
+%\extrainfo{additional information}                 % optional, remove / comment the line if not wanted
+%\photo[64pt][0.4pt]{picture}                       % optional, remove / comment the line if not wanted; '64pt' is the height the picture must be resized to, 0.4pt is the thickness of the frame around it (put it to 0pt for no frame) and 'picture' is the name of the picture file
+%\quote{Some quote}                                 % optional, remove / comment the line if not wanted
+
+% to show numerical labels in the bibliography (default is to show no labels); only useful if you make citations in your resume
+%\makeatletter
+%\renewcommand*{\bibliographyitemlabel}{\@biblabel{\arabic{enumiv}}}
+%\makeatother
+%\renewcommand*{\bibliographyitemlabel}{[\arabic{enumiv}]}% CONSIDER REPLACING THE ABOVE BY THIS
+
+% bibliography with mutiple entries
+%\usepackage{multibib}
+%\newcites{book,misc}{{Books},{Others}}
+%----------------------------------------------------------------------------------
+%            content
+%----------------------------------------------------------------------------------
+\begin{document}
+%\begin{CJK*}{UTF8}{gbsn}                          % to typeset your resume in Chinese using CJK
+%-----       resume       ---------------------------------------------------------
+\makecvtitle
+
+\section{Education and Research Overview}
+
+\vspace{5pt}
+
+\subsection{Academic Qualifications}
+
+\vspace{5pt}
+
+\begin{itemize}
+\small{
+\item{\cventry{\small{2012--2016}}{\small{PhD Theoretical Physics}}{University of Exeter}{Exeter, UK}{}{\small{Graduated December 2016}}}
+
+\item{\cventry{\small{2011--2012}}{\small{Honours Year (Masters), Physics, 1st Class Honours, Distinction}}{University of Wollongong}{Wollongong, Australia}{}{\small{Dissertation grade: 96\% -- Overall Masters Grade: 93\%}}}  % arguments 3 to 6 can be left empty
+
+\item{\cventry{\small{2008--2012}}{\small{BSc Advanced (Physics), 1st Class Honours, Distinction}}{University of Wollongong}{Wollongong, Australia}{}{\small{Degree Average: 87\%}}}  % arguments 3 to 6 can be left empty
+
+\item{\cventry{\small{2004--2007}}{\small{Higher School Certificate}}{Holy Spirit College Bellambi}{Wollongong, Australia}{}{\small{University Admission Index: 92}}}
+}
+\end{itemize}
+
+\vspace{5pt}
+
+\subsection{Notable Projects}
+
+\vspace{5pt}
+
+\begin{itemize}
+\small{
+\item{\textbf{Doctoral Project:} \textit{\small{`Anomalous Electron Pairing in Graphene'}}
+\small{\begin{itemize}
+\item Computational work performed mostly in Python (some Mathematica) with NumPy and SciPy, with all coding and algorithm design developed from scratch.
+\item Development and application of novel low-dimensional quantum condensed-matter field theories to the study of mesoscopic systems.
+\item Lead to the proposal of a new kind of quasiparticle in graphene
+\end{itemize}}}
+\item{\textbf{Independent Project (Ongoing):} \textit{\small{`2d to 1d geometrical lensing in nanoplasmonic arrays'}}
+\small{\begin{itemize}
+\item Exploration of plasmon tunnelling in a two--dimensional array of metallic nanoparticles
+\item Suggestive of a new kind of plasmonic lens which focusses two--dimensional plasmons along a single, quasi--one--dimensional axis in the array.
+\end{itemize}}}
+\item{\textbf{Masters Project:}\textit{\small{`Energy relaxation rate of an external electron due to plasma oscillations in a 2DEG with Rashba spin--orbital coupling', }}\small{Dissertation grade: 96\% -- Overall Masters Grade: 93\%}
+\small{\begin{itemize}
+\item All code developed from scratch in C++
+\item This work studied electron transport normal to semiconductor heterojunctions with Rashba spin-orbit coupling
+\item Applications in the area of energy loss in spintronic nanostructures
+\end{itemize}}}}
+\end{itemize}
+\vspace{5pt}
+\subsection{List of Publications}
+
+\vspace{5pt}
+
+\begin{itemize}
+\small{
+\item{\textbf{Metastable electron--electron states in double--layer graphene structures}\\
+      \textcolor{blue}{\underline{\href{http://journals.aps.org/prb/pdf/10.1103/PhysRevB.92.085409}{\small{PHYSICAL REVIEW B \textbf{92}, 085409 (2015)}}}}}
+
+\vspace{4pt}
+
+\item{\textbf{Bielectrons in the Dirac sea in graphene: the role of many–body effects}\\
+		\textcolor{blue}{\underline{\href{http://arxiv.org/abs/1512.02953}{\small{arXiv:1512.02953 [cond-mat.mes-hall]}}}}}
+\small}
+\end{itemize}
+
+\section{Teaching}
+\vspace{5pt}
+\small{
+\begin{itemize}
+\item Tutor (unsupervised; lecture-style teaching):
+\begin{itemize}
+\item Thermal Physics, University of Exeter, 2014 -- 2016
+\item Quantum Mechanics, University of Exeter, 2014 -- 2016
+\item Electromagnetism, University of Exeter, 2014 -- 2016
+\item Condensed Matter Physics, University of Exeter, 2014 -- 2015
+\end{itemize}
+\item Demonstrator (problems classes):
+\begin{itemize}
+\item 2nd Year Mathematics Problems, University of Exeter, 2013 -- 2017
+\item 1st Year Mathematics Problems, University of Exeter, 2016 -- 2017
+\item 2nd Year Physics Problems, University of Exeter, 2014 -- 2016
+\end{itemize}
+\item Demonstrator (laboratory classes):
+\begin{itemize}
+\item 1st Year Physics Labs, University of Wollongong, 2010 -- 2012
+\item 2nd Year Physics Labs, University of Wollongong, 2011 -- 2012
+\item 3rd Year Physics Labs, University of Wollongong, 2011 -- 2012
+\end{itemize}
+\item I have offered private tuition for the following modules:
+\vspace{-10pt}
+\begin{multicols}{2}
+\begin{itemize}
+\small{\item Fundamentals of Physics A
+\item Fundamentals of Physics B
+\item Mathematics 1A part 1
+\item Mathematics 1A part 2
+\item Classical Mechanics
+\item Thermodynamics
+\item Modern Physics
+\item Multivariate and Vector Calculus
+\item Linear Algebra}
+\end{itemize}
+\end{multicols}
+\end{itemize}}
+
+\section{Conference Presentations and Invited Talks}
+\vspace{5pt}
+\begin{itemize}
+\small{
+\item{\textbf{Invited Talk} \small{University of Bath (2016)}\\
+		\textit{\small{``Like charges attract: an anomalous electron-electron pairing effect in graphene''}}}
+\item{\textbf{Quantum Systems and Nanomaterials Seminar} \small{University of Exeter (2015)}\\
+		\textit{\small{``Bielectrons in graphene''}}}
+\item{\textbf{INASCON} \small{Basel, Switzerland (2015)}\\
+\textit{\small{``Like charges attract: an anomalous electron--electron pairing effect in graphene''}}}
+\item{\textbf{Quantum Systems and Nanomaterials Seminar} \small{University of Exeter (2014)}\\
+\textit{\small{``Anomalous Electron Pairing in Graphene''}}}
+\item{\textbf{GrapheneWeek (8th International Conference on the Fundamental Science of Graphene and Applications of Graphene-Based Devices)} \small{Gothenburg, Sweden (2014)}\\
+\textit{\small{``Anomalous electron pairing in graphene: Cooper–like states and their trajectories''}}}
+\item{\textbf{Quantum Systems and Nanomaterials Seminar} \small{University of Exeter (2013)}\\
+\textit{\small{``Anomalous electron–electron pairs in graphene''}}}
+\item{\textbf{GrapheneWeek (7th International Conference on the Fundamental Science of Graphene and Applications of Graphene-Based Devices)} \small{Chemnitz, Germany (2013)}\\
+\textit{\small{``Excitons in graphene: the
+two–body problem revisited''}}}}
+\end{itemize}
+
+\section{Honours and Awards}
+\vspace{5pt}
+\begin{itemize}\small{
+\item{\textbf{Exeter Students’ Guild Teaching Awards} \small{(twice nominated) \textit{``Category: Best Graduate Teaching Assistant''}}}
+\item{\textbf{University of Exeter Early Careers Network Poster Prize} \small{(2015) \textit{``1st place''}} -- £100}
+\item{\textbf{Europhysics Letters Prize} \small{(2013) \textit{``In recognition of the best presentation at GrapheneWeek 2013''}} -- \euro 500}
+\item{\textbf{College Research Studentship}\small{ (2012--2016)} -- $\sim$£14000 annual stipend, plus fees}
+\item{\textbf{Physics Engineering Discipline Prize} \small{(2010, 2011 and 2012) \textit{``For best performance in physics''}} -- \$250}
+\item{\textbf{University of Wollongong Dean's Merit List}\small{ (2010, 2011 and 2012)}}
+\item{\textbf{Kittel--Lewis Prize for Solid State Physics}\small{ (2011) \textit{``For best performance in Solid State Physics''}} -- \$500}}
+\end{itemize}
+
+\section{Scientific Outreach, Interests and Miscellaneous}
+
+\vspace{5pt}
+
+\small{\begin{itemize}
+\item \textbf{Computing Skills:}
+\begin{itemize}
+\item Python: primary language, with NumPy, SciPy, Matplotlib, Pandas etc. Mostly algorithmic and numerical work, with data visualisation 
+\item C++: secondary language. Mostly with regards to computational mathematics/physics
+\item \LaTeX
+\item Working knowledge of Mathematica for computational mathematics and data visualisation.
+\item Comfortable working in common operating systems: Linux (primary), Microsoft Windows, Mac OS.
+\end{itemize}
+\item \textbf{Spoken Language:} English (native proficiency).
+\item \textbf{Citizenship:} Australian and Irish (dual citizenship).
+\item \textbf{Cosmos Science Magazine (Editorial Intern):} In 2006, at age 16, I completed an editorial internship at Cosmos, an Australian popular science magazine. After some time there I began writing articles instead, three of which were published. These were:
+\begin{itemize}
+\item \textit{``Coming up trumps; chemistry's most useful invention started with a game of cards''}
+\item \textit{``A bundle of energy''}
+\item \textit{``A fish called Jaws''}
+\end{itemize}
+\item \textbf{Contemporary Physics (Textbook Reviewer):} In this role I have reviewed several textbooks for the journal Contemporary Physics. These titles are:
+\begin{itemize}
+\item \textit{``Quantum Information Theory and the Foundations of Quantum Mechanics''}, C.G.  Timpson (2004).
+\item \textit{``Conductor-Insulator Quantum Phase Transitions''}, by V. Dobrosavljevic, N. Trivedi and J.M. Valles (2012).
+\item \textit{``Quantum Hall Effects''} [in progress], Z.F. Ezawa (2013).
+\end{itemize}
+\item{\textbf{Undergraduate Student Representative}: During my time at the University of Wollongong, I was elected to the position of undergraduate student representative on the School of Physics Board. In this role I liaised with students and staff, bringing the concerns of my peers to the attention of their lecturers and vice versa. In particular, I petitioned the board to allocate funds for the introduction to the curriculum of a general relativity course, which was taught for the first time in 2012.}
+\item{\textbf{University of Wollongong Physics Society (Co--Founder):} I was a co--founder of the University of Wollongong Physics Society, which became instantly popular among the small but nevertheless passionate and talented student body in the School of Physics. Among our regular activities were invited technical talks by lecturers and postgraduates from the department, regular lunchtime screenings of documentaries, end of term festivities, a popular liquid nitrogen ice--cream stall on campus and a \textit{very} successful trivia team.}
+\item{\textbf{Physics Society Lunchtime Tutorials (Organiser):} During my time at the University of Wollongong, the undergraduate curriculum was heavily lecture-based, with no seminars, problems classes or tutorials. Through the physics society, I helped to organise and teach informal bi-weekly tutorials. Students who were struggling with work could come and ask us whichever questions they needed help with, and receive assistance for free.}
+\item{\textbf{Kaggle Data Science Bowl 2016 (Team Member):} I am currently competing in a data science and coding competition. Together with the computer scientists, mathematicians and bioinformaticians on my team, I am helping to write code which, drawing on ideas from artificial intelligence, will diagnose lung cancer by `looking at' scans.}
+\item{I am a classical and Spanish guitarist, and play in a small ensemble with friends; we are a guitar, violin, viola, bass and mandolin. I also enjoy hiking and rock climbing.}
+\end{itemize}}
+
+\vspace{5pt}
+
+\subsection{Online Profiles}
+
+\vspace{5pt}
+
+\begin{itemize}
+\item{\textcolor{blue}{\underline{\href{http://linkedin.com/in/lachlan-marnham-a463b190}{LinkedIn}}}}
+
+\vspace{6pt}
+
+\item{\textcolor{blue}{\underline{\href{https://www.researchgate.net/profile/Lachlan_Marnham}{ResearchGate}}}}
+
+\vspace{6pt}
+
+\item{\textcolor{blue}{\underline{\href{https://scholar.google.co.uk/citations?user=5Vi60LYAAAAJ&hl=en}{Google Scholar}}}}
+
+\vspace{6pt}
+
+\item{\textcolor{blue}{\underline{\href{http://arxiv.org/a/marnham_l_1.html}{Ar$\chi$iv}}}}
+\end{itemize}
+
+%\pagebreak
+
+%\section{References}
+
+%\vspace{5pt}
+
+%\begin{itemize}
+%\item{\textbf{Dr. Sharon Strawbridge (My Module Leader for Natural Sciences Tutoring)}\\
+%		Senior Lecturer of Physics and Chemistry\\
+%		School of Physics, University of Exeter,\\
+%		Stocker Road, Exeter, UK, EX4 4QL.\\
+%		\Phone\thinspace+44 1392 725189\\
+%		\Letter\thinspace\textcolor{blue}{\underline{\href{mailto:S.M.Strawbridge@exeter.ac.uk}{ S.M.Strawbridge@exeter.ac.uk}}}}
+
+%\vspace{6pt}
+
+%\item{\textbf{Dr. Jacopo Bertolotti (My Module Leader for Mathematics with Physical Applications Demonstrating)}\\
+%		Lecturer of Physics\\
+%		School of Physics, University of Exeter,\\
+%		Stocker Road, Exeter, UK, EX4 4QL.\\
+%		\Phone\thinspace+44 1392 725695\\
+%		\Letter\thinspace\textcolor{blue}{\underline{\href{mailto:S.M.Strawbridge@exeter.ac.uk}{J.Bertolotti@exeter.ac.uk}}}}
+
+%\vspace{6pt}		
+
+%\item{\textbf{Dr. Andrey Shytov (My PhD Supervisor)}\\
+%		Lecturer of Physics\\
+%		School of Physics, University of Exeter,\\
+%		Stocker Road, Exeter, UK, EX4 4QL.\\
+%		\Phone\thinspace+44 1392 722169\\
+%		\Letter\thinspace\textcolor{blue}{\underline{\href{mailto:A.Shytov@exeter.ac.uk}{A.Shytov@exeter.ac.uk}}}}
+
+%\vspace{6pt}
+
+%\item{\textbf{Dr. Marcin Mucha-Kuczynski (My Thesis Examiner and Collaborator)}\\
+%		Assistant Professor of Physics\\
+%		Department of Physics, University of Bath,\\
+%		Claverton Down, Bath, UK, BA2 7AY.\\
+%		\Phone\thinspace+44 1225 385543\\
+%		\Letter\thinspace\textcolor{blue}{\underline{\href{mailto:M.Mucha-Kruczynski@bath.ac.uk}{M.Mucha-Kruczynski@bath.ac.uk}}}}
+
+%\vspace{6pt}
+
+%\item{\textbf{Prof. Chao Zhang (My Masters Supervisor; Was Also My Statistical Mechanics, Thermodynamics and Quantum Mechanics Professor)}\\
+%		Professor of Physics, Coordinator of Solid State Research Program \\
+%		Institute of Superconducting and Electronic Materials, University of Wollongong,\\
+%		Northfields Ave, Wollongong, New South Wales, Australia, 2522.\\
+%		\Phone\thinspace+61 2 4221 3458\\
+%		\Letter\thinspace\textcolor{blue}{\underline{\href{mailto:Chao_Zhang@uow.edu.au}{chao\_zhang@uow.edu.au}}}}
+
+%\vspace{6pt}
+
+%\item{\textbf{Prof. Roger Lewis (My Undergraduate Solid State Physics Professor)}\\
+		%Professor of Physics, Chair of Faculty of Engineering Research Committee\\
+		%Institute of Superconducting and Electronic Materials, University of Wollongong,\\
+		%Northfields Ave, Wollongong, New South Wales, Australia, 2522.\\
+		%\Phone\thinspace+61 2 4221 3518\\
+		%\Letter\thinspace\textcolor{blue}{\underline{\href{mailto:roger_lewis@uow.edu.au}{roger\_lewis@uow.edu.au}}}}
+
+%\end{itemize}
+
+% Publications from a BibTeX file without multibib
+%  for numerical labels: \renewcommand{\bibliographyitemlabel}{\@biblabel{\arabic{enumiv}}}% CONSIDER MERGING WITH PREAMBLE PART
+%  to redefine the heading string ("Publications"): \renewcommand{\refname}{Articles}
+\nocite{*}
+\bibliographystyle{plain}
+%\bibliography{publications}                        % 'publications' is the name of a BibTeX file
+
+% Publications from a BibTeX file using the multibib package
+%\section{Publications}
+%\nocitebook{book1,book2}
+%\bibliographystylebook{plain}
+%\bibliographybook{publications}                   % 'publications' is the name of a BibTeX file
+%\nocitemisc{misc1,misc2,misc3}
+%\bibliographystylemisc{plain}
+%\bibliographymisc{publications}                   % 'publications' is the name of a BibTeX file
+
+%-----       letter       ---------------------------------------------------------
+
+\end{document}
+
+
+%% end of file `template.tex'.
